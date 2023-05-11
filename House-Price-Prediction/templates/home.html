@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+<div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img
+        src="static/banner.jpg"
+        class="d-block w-100"
+        alt="..."
+        height="520px"
+      />
+      <div
+        class="carousel-caption d-none d-md-block"
+        style="color: #ffbf00; margin-bottom: 270px"
+      >
+        <div style="float: left; width: 500px; color: black">
+          <h2>Find Your Dream House By Us Within Your Budget</h2>
+          <h5>Some representative placeholder content for the first slide.</h5>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img
+        src="static/banner6.jpg"
+        class="d-block w-100"
+        alt="..."
+        height="520px"
+      />
+      <div class="carousel-caption d-none d-md-block">
+        {% comment %} <h5>Second slide label</h5>
+        <p>Some representative placeholder content for the second slide.</p> {% endcomment %}
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img
+        src="static/banner4.jpg"
+        class="d-block w-100"
+        alt="..."
+        height="520px"
+      />
+      <div class="carousel-caption d-none d-md-block">
+        {% comment %} <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p> {% endcomment %}
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleCaptions"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleCaptions"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div class="container">
+  <h1 class="py-5 text-center">WELCOME TO REAL ESTATE HOUSE PRICE PREDICTION</h1>
+  <div class="row">
+    <div class="col" style="text-align: justify;">
+      <h2 class="text-center">What is HPP?</h2>
+      <p>
+        House price is closely related to everyone's life, and it is affected
+        by many factors. House price prediction is an important research point
+        for that it can help people to make strategies about house dealing.
+        There are many existing researches about house price prediction.
+        However, existing studies cannot make a comprehensive comparison and
+        analysis of popular housing price forecasting methods. Machine
+        learning and in-depth learning can be used to predict house prices and
+        evaluate the models.
+      </p>
+      <p>
+        House Price prediction is important to drive Real Estate efficiency.
+        As earlier, House prices were determined by calculating the acquiring
+        and selling price in a locality. Therefore, the House Price prediction
+        model is very essential in the information gap and improving Real
+        Estate efficiency.
+      </p>
+    </div>
+    <div class="col">
+      <img src="static/hpp.png" alt="" width="100%" style="border-top-left-radius: 25px; border-bottom-right-radius: 25px;"/>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-4">
+      <img src="static/how3.png" alt="" width="100%" style="margin-top: 9px;"/>
+    </div>
+    <div class="col-8">
+      <h2 class="text-center">Working Procedure To Build Our Model!</h2>
+      <div class="container pt-3">
+        <div class="row">
+          <div class="col">
+            <div class="card container-center" style="height: 370px">
+              <div
+                class="card-body vertical-center text-center"
+                style="text-align: center"
+              >
+                <h5 class="card-title">Data Collection and Exploration</h5>
+                <div style="display: none;" id="para1">
+                  <p>
+                    In our project we are dealing with the dataset which is
+                    collected from the Kaggle platform.
+                  </p>
+                  <p>
+                    Data exploration is examining data to identify patterns and
+                    make sense of them in the context of one’s problem.
+                  </p>
+                </div>
+                <button id="btn1" class="btn btn-primary" onclick="read_more('para1', 'btn1')">Read more!</button>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card container-center" style="height: 370px">
+              <div
+                class="card-body vertical-center container"
+                style="text-align: center;"
+              >
+                <h5 class="card-title">Data Preprocessing</h5>
+                <p style="display: none;" id="para2">
+                  Data pre-processing is the process of transforming raw data
+                  into a form suitable for model development. Data cleaning
+                  also falls under data pre-processing. Often we get the
+                  dataset, that has irrelevant values or missing values, which
+                  needs to be cleaned before fitting into a ML model.
+                </p>
+                <button id="btn2" class="btn btn-primary" onclick="read_more('para2', 'btn2')">Read more!</button>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card container-center" style="height: 370px">
+              <div
+                class="card-body vertical-center container"
+                style="text-align: center;"
+              >
+                <h5 class="card-title">Model Development</h5>
+                <p style="display: none;" id="para3">
+                  Firstly, we spilt our cleaned dataset in such a way that 80%
+                  of the known dataset can be used as training set and 20% can
+                  be used as test data set. Using the training set ML model is
+                  constructed and tested with test data to identify the
+                  accuracy level of the model
+                </p>
+                <button id="btn3" class="btn btn-primary" onclick="read_more('para3', 'btn3')">Read more!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="features">
+    <div class="demo">
+      <h2 style="text-decoration: underline;">Features We Used For Prediction</h2>
+      <p><b>Location wise</b> - Area Wise Fetch house according to your need.
+      <p><b>Bedroom wise</b> - How many Bedroom any house have which are in our data.
+      <p><b>Bathroom wise</b> - How many Bathroom house have which are in our data.
+      <p><b>Square foot wise</b> - According area of square foot your selected house had.
+    </div>
+  </div>
+  <div class="container text-center my-5">
+    <h2>Key Concepts to Learn for this Project!</h2>
+    <div class="row my-4">
+      <div class="col">
+        <div class="card" style="width: 100%;">
+          <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank">
+            <img src="static/ml.jpg" class="card-img-top" alt="..." height=250>
+          </a>
+          <div class="card-body">
+            <p class="card-text">Machine learning (ML) is a field devoted to understanding and building methods that let machines "learn" – that is, methods that leverage data to improve computer performance on some set of tasks...<a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank">learn more</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 100%;">
+          <a href="https://en.wikipedia.org/wiki/Supervised_learning" target="_blank">
+            <img src="static/sl1.jpg" class="card-img-top" alt="..." height=250 style="border: 1px solid #d55528">
+          </a>
+          <div class="card-body">
+            <p class="card-text">Supervised learning (SL) is a machine learning paradigm for problems where the available data consists of labeled examples, meaning that each data point contains features (covariates) and an associated label...<a href="https://en.wikipedia.org/wiki/Supervised_learning" target="_blank">learn more</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 100%;">
+          <a href="https://www.seldon.io/machine-learning-regression-explained#:~:text=Machine%20Learning%20Regression%20is%20a,used%20to%20predict%20continuous%20outcomes." target="_blank">
+            <img src="static/regression.jpg" class="card-img-top" alt="..." height=250>
+          </a>
+          <div class="card-body">
+            <p class="card-text">Machine Learning Regression is a technique for investigating the relationship between independent variables or features and a dependent variable or outcome. It’s used as a method for predictive modelling in machine learning...<a href="https://www.seldon.io/machine-learning-regression-explained#:~:text=Machine%20Learning%20Regression%20is%20a,used%20to%20predict%20continuous%20outcomes." target="_blank">learn more</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function read_more(id, bid) {
+    var button = document.getElementById(bid);
+    var para = document.getElementById(id);
+    if (button.innerText === "Read more!") {
+      para.style.display = "block";  
+      button.innerHTML = "Read less!"
+    }
+    else {
+      para.style.display = "none";  
+      button.innerHTML = "Read more!"
+    }
+  }    
+</script>
+{% endblock body %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block body %}
+<div class="containter-fluid px-0">
+    <img src="static/career.png" width="100%" alt="">
+</div>
+<div class="container my-3">
+    <h1 class="text-center">Send Feedback or Any Query</h1>
+        <form action="/contact" method="post" class="px-5">
+            {% csrf_token %}
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label><span id="name_Warning"></span>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" onkeyup="checkName()">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label><span id="email_Warning"></span>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" onkeyup="checkEmail()">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Contact number</label><span id="phoneNumber_Warning"></span>
+                <input type="phone" class="form-control" id="phone" name="phone" placeholder="Enter your contact number" onkeyup="checkPhoneNumber()">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Type of Message</label>
+                <select class="form-select" aria-label="Default select example" name="type_choice" required>
+                    <option selected hidden value="Feedback">Please select the type of message</option>
+                    <option value="Feedback">Feedback</option>
+                    <option value="Query">Query</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">Message</label>
+                <textarea class="form-control" id="desc" name="desc" rows="3" placeholder="Enter your message"></textarea>
+            </div>
+            <button class="btn btn-primary d-grid gap-2 col-1 mx-auto" type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        function checkPhoneNumber()
+        {
+            var phoneNumber = document.getElementById("phone").value;
+            var output = document.getElementById("phoneNumber_Warning");
+            output.style.color = "red";
+            if (!(/^[0-9]/.test(phoneNumber)) && phoneNumber != "")
+               output.innerHTML = "&nbsp;Phone number must contains only digits!";
+            else if (phoneNumber.length != 10 && phoneNumber.length > 0)
+                 output.innerHTML = "&nbsp;Phone Number must be 10 digits!";     
+            else
+               output.innerHTML = "";
+        }
+        function checkName() {
+            var name = document.getElementById("name").value;
+            var output = document.getElementById("name_Warning");
+            output.style.color = "red";
+            if (name.length < 4 && name != "")
+               output.innerHTML = "&nbsp;Name Must Have Atleast 4 Character!";
+            else
+               output.innerHTML = "";
+        }
+    </script>
+{% endblock body %}

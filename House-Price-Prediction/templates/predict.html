@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Predict{% endblock title %}
+
+{% block body %}
+<div class="body bg-primary">
+    <div class="container predict-container">
+        <div class="row">
+            <div class="card predict-card" style="width: 100%; height: 100%; margin-top: 50px">
+                <div class="card-header" style="text-align: center;">
+                    <h1><b style="color: black;">Welcome to Bengaluru House Price Prediction</b></h1>
+                </div>
+                <br>
+                <br>
+                <h5><b style="color: black;">Want to predict the price of the house in Bengaluru? Fill the below details!</b></h5>
+                <div class="card-body">
+                    <form method="POST" accept-charset="utf-8">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 form-group" style="text-align: center">
+                                <label>
+                                    <b style="color: white;">Select The Location:</b>
+                                </label>
+                                <select style="border-radius:20px" class="select-picker form-control my-2" id="location" name="location"  required="1">
+                                    {% for location in locations %}
+                                        <option value="{{ location }}">{{ location }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group" style="text-align: center">
+                                <label>
+                                    <b style="color: white;">Enter BHK:</b>
+                                </label>
+                                <input style="border-radius: 20px;" name="bhk" id="bhk" class="form-control my-2" placeholder="Enter BHK" type="text">
+                            </div>
+                            <div class="col-md-6 form-group" style="text-align: center">
+                                <label>
+                                    <b style="color: white;">Enter Number of Bathrooms:</b>
+                                </label>
+                                <input style="border-radius: 20px;" name="bath" id="bath" class="form-control my-2" placeholder="Enter Number of Bathrooms" type="text">
+                            </div>
+                            <div class="col-md-6 form-group" style="text-align: center">
+                                <label>
+                                    <b style="color: white;">Enter Squere Feet:</b>
+                                </label>
+                                <input style="border-radius: 20px;" name="total_sqft" id="total_sqft" class="form-control my-2" placeholder="Enter Squere Feet" type="text">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <button style="margin-left: 473px; margin-top: 30px; width: 200px; border-radius: 30px;" class="btn btn-dark btn-lg form-control" onclick="send_data()">Predict Price</button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <div class="col-md-12" style="text-align: center">
+                        <h3><span id="prediction"></span></h3>
+                    </div>
+                </div>
+                <br>
+              <br>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function form_handler(event){
+        event.preventDefault();
+        {% comment %} Do not submit the form normally {% endcomment %}
+    }
+    function send_data(){
+        document.querySelector('form').addEventListener("submit",form_handler);
+        var fd = new FormData(document.querySelector('form'));
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST','/predict/prediction',true);
+        document.getElementById("prediction").innerHTML="Wait Predicting Price!...."
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState == XMLHttpRequest.DONE){
+                document.getElementById('prediction').innerHTML = "Prediction: ₹"+xhr.responseText;
+            }
+        };
+
+        xhr.onload = function(){
+
+        };
+        xhr.send(fd);  
+    }
+</script>
+{% endblock body %}
